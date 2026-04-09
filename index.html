@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Assistência Técnica</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+  @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css');
+
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url('https://images.unsplash.com/photo-1555949963-aa79dcee981c') no-repeat center center/cover;
+    background-size: cover;
+    color: white;
+    scroll-behavior: smooth;
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 15px 0;
+    z-index: 1000;
+  }
+
+  nav a { color: white; text-decoration: none; font-weight: bold; transition: 0.3s; }
+  nav a:hover { color: #22c55e; }
+
+  section {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 100px 20px 20px 20px;
+  }
+
+  .box {
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(10px);
+    padding: 25px;
+    border-radius: 12px;
+    max-width: 500px;
+    margin: auto;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  }
+
+  h1, h2 { color: #22c55e; text-shadow: 0 0 10px #22c55e; margin-bottom: 15px; }
+  p { opacity: 0.9; line-height: 1.5; }
+
+  label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  input[type=checkbox] { width: 18px; height: 18px; }
+  .service-icon { width: 25px; text-align: center; }
+
+  button {
+    margin-top: 20px;
+    padding: 12px;
+    width: 100%;
+    background: #22c55e;
+    border: none;
+    color: black;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  button:hover { background: #16a34a; transform: scale(1.05); }
+
+  .sobre-me { text-align: left; }
+  .sobre-me p { margin: 8px 0; opacity: 0.9; }
+
+  .whatsapp-float {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: #22c55e;
+    color: black;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    z-index: 1001;
+    transition: 0.3s;
+  }
+  .whatsapp-float:hover { background: #16a34a; transform: scale(1.1); }
+
+  /* Modal */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7);
+  }
+
+  .modal-content {
+    background-color: rgba(15, 23, 42, 0.95);
+    margin: 15% auto;
+    padding: 25px;
+    border-radius: 12px;
+    width: 80%;
+    max-width: 400px;
+    color: white;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    text-align: center;
+  }
+
+  .modal-content h3 { color: #22c55e; margin-bottom: 15px; }
+  .modal-content label { display: block; margin: 10px 0; cursor: pointer; text-align: left; }
+  .modal-content button {
+    background: #22c55e;
+    color: black;
+    font-weight: bold;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+  }
+  .modal-content button:hover { background: #16a34a; transform: scale(1.05); }
+
+  .close {
+    color: #ccc;
+    float: right;
+    font-size: 28px;
+    cursor: pointer;
+  }
+
+  @media (max-width: 600px) {
+    nav { gap: 20px; padding: 10px 0; }
+    .box { width: 90%; padding: 20px; }
+    .whatsapp-float { width: 50px; height: 50px; font-size: 24px; }
+  }
+
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#inicio">Início</a>
+  <a href="#servicos">Serviços</a>
+  <a href="#sobre">Sobre Mim</a>
+</nav>
+
+<section id="inicio">
+  <div class="box">
+    <h1>Assistência Técnica 💻</h1>
+    <p>Bem-vindo! Serviços de informática completos: formatação, instalação de softwares profissionais e otimização de sistemas.</p>
+    <p>Escolha os serviços na seção <strong>Serviços</strong> e fale direto comigo pelo WhatsApp.</p>
+  </div>
+</section>
+
+<section id="servicos">
+  <div class="box">
+    <h1>Serviços Disponíveis</h1>
+
+    <!-- Formatação com Modal -->
+    <label>
+      <span class="service-icon"><i class="fa-solid fa-computer"></i></span>
+      <input type="checkbox" id="formatacaoCheck" value="Formatação"> Formatação
+    </label>
+
+    <!-- Modal Formatação -->
+    <div id="modalFormatacao" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3>Escolha o Sistema Operacional</h3>
+        <label><input type="radio" name="so" value="Windows 10"> Windows 10</label>
+        <label><input type="radio" name="so" value="Windows 11"> Windows 11</label>
+        <label><input type="radio" name="so" value="Linux Mint"> Linux Mint</label>
+        <button onclick="confirmSO()">Confirmar</button>
+      </div>
+    </div>
+
+    <label><span class="service-icon"><i class="fa-solid fa-file-lines"></i></span>
+      <input type="checkbox" value="Instalar Office + Ativação (Completo)"> Instalar Office + Ativação (Completo)
+    </label>
+
+    <label><span class="service-icon"><img src="icons/Photoshop.png" style="width:20px;"></span>
+      <input type="checkbox" value="Photoshop 2022"> Photoshop 2022
+    </label>
+
+    <label><span class="service-icon"><img src="icons/Lightroom.png" style="width:20px;"></span>
+      <input type="checkbox" value="Lightroom Classic 2022"> Lightroom
+    </label>
+
+    <label><span class="service-icon"><img src="icons/AfterEffects.png" style="width:20px;"></span>
+      <input type="checkbox" value="After Effects"> After Effects
+    </label>
+
+    <label><span class="service-icon"><i class="fa-solid fa-broom"></i></span>
+      <input type="checkbox" value="Limpeza de software"> Limpeza
+    </label>
+
+    <label><span class="service-icon"><i class="fa-solid fa-tachometer-alt"></i></span>
+      <input type="checkbox" value="Otimização"> Otimização
+    </label>
+
+    <button onclick="enviar()">Solicitar no WhatsApp</button>
+  </div>
+</section>
+
+<section id="sobre">
+  <div class="box sobre-me">
+    <h2>Sobre Mim</h2>
+    <p><strong>Nome:</strong> Seu Nome</p>
+    <p><strong>Profissão:</strong> Técnico em Informática</p>
+    <p><strong>Localização:</strong> Sua Cidade, UF</p>
+    <p><strong>Experiência:</strong> X anos atuando com manutenção de computadores, instalação de softwares e otimização de sistemas.</p>
+    <p><strong>O que faço:</strong> Formatação, instalação/ativação de softwares, otimização e limpeza de sistemas, suporte técnico personalizado.</p>
+  </div>
+</section>
+
+<div class="whatsapp-float" onclick="abrirWhats()">
+  <i class="fa-brands fa-whatsapp"></i>
+</div>
+
+<script>
+  // Scroll suave do menu
+  document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // Modal Formatação
+  const modal = document.getElementById("modalFormatacao");
+  const checkboxForm = document.getElementById("formatacaoCheck");
+  const spanClose = modal.querySelector(".close");
+  let soEscolhido = "";
+
+  checkboxForm.addEventListener("click", () => { modal.style.display = "block"; });
+  spanClose.addEventListener("click", () => { modal.style.display = "none"; checkboxForm.checked = false; });
+  window.addEventListener("click", e => { if(e.target == modal) { modal.style.display = "none"; checkboxForm.checked = false; } });
+
+  function confirmSO() {
+    const escolhido = document.querySelector('input[name="so"]:checked');
+    if(!escolhido) { alert("Escolha um sistema operacional!"); return; }
+    soEscolhido = escolhido.value;
+    alert("Você escolheu: " + soEscolhido);
+    modal.style.display = "none";
+  }
+
+  // Enviar WhatsApp
+  function enviar() {
+    let selecionados = [];
+    document.querySelectorAll("#servicos input[type=checkbox]:checked").forEach(el => {
+      if(el.id == "formatacaoCheck" && soEscolhido) {
+        selecionados.push(el.value + " (" + soEscolhido + ")");
+      } else if(el.id != "formatacaoCheck") {
+        selecionados.push(el.value);
+      }
+    });
+
+    if(selecionados.length === 0) { alert("Selecione pelo menos um serviço!"); return; }
+
+    let mensagem = "Olá! Quero os seguintes serviços:%0A- " + selecionados.join("%0A- ");
+    let numero = "55DDDNÚMERO"; // Substitua pelo seu número real
+    window.open(`https://wa.me/${numero}?text=${mensagem}`, "_blank");
+  }
+
+  function abrirWhats() {
+    let numero = "55DDDNÚMERO"; // Substitua pelo seu número real
+    window.open(`https://wa.me/${numero}`, "_blank");
+  }
+
+</script>
+
+</body>
+</html>
